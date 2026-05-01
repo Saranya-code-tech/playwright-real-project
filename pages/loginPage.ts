@@ -25,4 +25,10 @@ export class LoginPage {
   async verifyLoginError() {
     await expect(this.page.locator('[data-test="error"]')).toBeVisible();
   }
+
+  async verifyLoginErrorMessage(expectedMessage: string) {
+    const errorLocator = this.page.locator('[data-test="error"]');
+    await expect(errorLocator).toBeVisible();
+    await expect(errorLocator).toHaveText(expectedMessage);
+  }
 }

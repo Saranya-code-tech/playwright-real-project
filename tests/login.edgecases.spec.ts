@@ -4,28 +4,21 @@ import { loginData } from '../test-data/loginData';
 
 let loginPage: LoginPage;
 
-test.describe('@smoke SauceDemo login smoke tests', () => {
+test.describe('@edge SauceDemo login edge cases', () => {
   test.beforeEach(async ({ page }) => {
     loginPage = new LoginPage(page);
     await loginPage.navigate();
   });
 
-  test('valid login using Page Object Model', async () => {
+  test('locked out user cannot login', async () => {
     await loginPage.login(
-      loginData.validUser.username,
-      loginData.validUser.password
+      loginData.lockedOutUser.username,
+      loginData.lockedOutUser.password
     );
 
-    await loginPage.verifyLoginSuccess();
-  });
-
-  test('invalid login shows error', async () => {
-    await loginPage.login(
-      loginData.invalidUser.username,
-      loginData.invalidUser.password
+    await loginPage.verifyLoginErrorMessage(
+      'Epic sadface: Sorry, this user has been locked out.'
     );
-
-    await loginPage.verifyLoginError();
   });
 
   test('empty username and password shows required field error', async () => {
