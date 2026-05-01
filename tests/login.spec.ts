@@ -25,4 +25,15 @@ test('invalid login shows error', async () => {
   );
 
   await loginPage.verifyLoginError();
+  
+});
+
+test('locked out user cannot login', async () => {
+  await loginPage.login(
+    loginData.lockedOutUser.username,
+    loginData.lockedOutUser.password
+  );
+
+  await loginPage.verifyLoginError();
+
 });

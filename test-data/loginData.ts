@@ -6,5 +6,9 @@ export const loginData = {
   invalidUser: {
     username: 'invalid_user',
     password: 'wrong_password'
+  },
+  lockedOutUser: {
+  username: 'locked_out_user',
+  password: 'secret_sauce'
   }
 };
